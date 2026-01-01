@@ -5,7 +5,7 @@ resource "aws_instance" "nginx_log_1224" {
   key_name                    = aws_key_pair.ec2.key_name
   vpc_security_group_ids      = [aws_security_group.ssh.id]
   
-  # 👇 新增這些
+
   subnet_id                   = module.vpc.public_subnets[0]  # 放在 public subnet
   associate_public_ip_address = true                          # 分配公開 IP
   iam_instance_profile        = aws_iam_instance_profile.nginx.name  # 附加 IAM Role
