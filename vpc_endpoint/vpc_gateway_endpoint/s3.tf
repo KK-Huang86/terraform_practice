@@ -40,7 +40,7 @@ resource "aws_s3_bucket_policy" "private_only" {
         # 套用到這個 bucket 的所有檔案
         Resource = "${aws_s3_bucket.gateway_endpoint.arn}/*"
 
-        # 認可的 CloudFront distribution
+        # 認可的 vpc_endpoint 才可以讀取 s3
         Condition = {
           StringEquals = {
             "aws:sourceVpce" = aws_vpc_endpoint.s3_gateway.id
