@@ -56,13 +56,13 @@ resource "aws_security_group" "rds" {
   description = "Allow PostgreSQL from EC2"
   vpc_id      = aws_vpc.main.id
 
-  # 允許來自 EC2 的 PostgreSQL 連線
+  # 允許來自 EC2 的 PostgreSQL 連線 / lambda
   ingress {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
     security_groups = [aws_security_group.ec2.id]
-    description     = "PostgreSQL from EC2"
+    description     = "PostgreSQL / lambda from EC2"
   }
 
   tags = {
