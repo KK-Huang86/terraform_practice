@@ -3,9 +3,7 @@ from psycopg2.extras import RealDictCursor
 from datetime import datetime
 
 
-# ==========================================
-# Database Connection (類似 Django settings)
-# ==========================================
+#
 DATABASE_CONFIG = {
     'host': 'YOUR_RDS_ENDPOINT',
     'port': 5432,
@@ -16,7 +14,7 @@ DATABASE_CONFIG = {
 
 
 class DatabaseConnection:
-    """資料庫連線管理 (類似 Django 的 connection)"""
+    """資料庫連線管理 """
     
     def __init__(self):
         self.conn = None
@@ -36,16 +34,14 @@ class DatabaseConnection:
         self.conn.close()
 
 
-# ==========================================
-# Models (類似 Django Models)
-# ==========================================
+# Models 
 
 class ProductManager:
-    """Product 管理器 (類似 Django Manager)"""
+    """Product 管理器"""
     
     @staticmethod
     def create_table():
-        """建立表格 (類似 migrate)"""
+        """建立表格 """
         with DatabaseConnection() as cursor:
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS products (
@@ -61,7 +57,7 @@ class ProductManager:
     
     @staticmethod
     def create(name, price, stock=0):
-        """新增產品 (類似 Model.objects.create)"""
+        """新增產品 ( Model.objects.create)"""
         with DatabaseConnection() as cursor:
             cursor.execute("""
                 INSERT INTO products (name, price, stock)
@@ -72,14 +68,14 @@ class ProductManager:
     
     @staticmethod
     def all():
-        """取得所有產品 (類似 Model.objects.all())"""
+        """取得所有產品 (對應Model.objects.all())"""
         with DatabaseConnection() as cursor:
             cursor.execute("SELECT * FROM products ORDER BY id;")
             return cursor.fetchall()
     
     @staticmethod
     def filter(name=None, min_price=None):
-        """篩選產品 (類似 Model.objects.filter())"""
+        """篩選產品 (功能近乎於 Model.objects.filter())"""
         with DatabaseConnection() as cursor:
             query = "SELECT * FROM products WHERE 1=1"
             params = []
@@ -98,7 +94,7 @@ class ProductManager:
     
     @staticmethod
     def update(product_id, **kwargs):
-        """更新產品 (類似 instance.save())"""
+        """更新產品 (功能近乎於 instance.save())"""
         with DatabaseConnection() as cursor:
             set_clause = ", ".join([f"{k} = %s" for k in kwargs.keys()])
             query = f"UPDATE products SET {set_clause}, updated_at = CURRENT_TIMESTAMP WHERE id = %s RETURNING *;"
@@ -108,7 +104,7 @@ class ProductManager:
     
     @staticmethod
     def delete(product_id):
-        """刪除產品 (類似 instance.delete())"""
+        """刪除產品 (功能近乎於 instance.delete())"""
         with DatabaseConnection() as cursor:
             cursor.execute("DELETE FROM products WHERE id = %s;", (product_id,))
             return cursor.rowcount > 0

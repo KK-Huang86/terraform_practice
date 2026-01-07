@@ -73,6 +73,6 @@ resource "aws_security_group" "rds" {
 
 # 公鑰 key pair
 resource "aws_key_pair" "ec2" {
-  key_name   = "1226_rds"
-  public_key = file("~/.ssh/1226_rds.pub")
+  key_name   = var.key_pair_name
+  public_key = file(var.ssh_public_key_path)
 }

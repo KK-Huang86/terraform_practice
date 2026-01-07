@@ -10,10 +10,8 @@ RDS 連線測試腳本
 import psycopg2
 import sys
 
-# ==========================================
 # 資料庫連線設定
-# ==========================================
-# 部署後,從 terraform output 取得這些值
+# 從 terraform output 取得這些值
 
 DB_HOST = "YOUR_RDS_ENDPOINT"  # 例如: my-postgres-db.xxxxx.ap-northeast-1.rds.amazonaws.com
 DB_PORT = 5432
