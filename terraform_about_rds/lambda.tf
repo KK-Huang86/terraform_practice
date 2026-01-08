@@ -88,7 +88,7 @@ resource "aws_security_group_rule" "lambda_to_rds" {
   to_port                  = 5432
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.lambda.id
-  security_group_id        = aws_security_group.rds.id
+  security_group_id        = aws_security_group.rds.id # 原本只有ec2 加入 rds 的security_group ，這裡再加上 lambda，後續可以整合
 }
 
 # Lambda Function
