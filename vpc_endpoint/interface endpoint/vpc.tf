@@ -1,7 +1,7 @@
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  enable_dns_support = true
+  enable_dns_hostnames = true # VPC 內自動產生 DNS名稱 interface 需要，才知道要送哪
+  enable_dns_support = true # VPC 內啟用 AWS DNS 服務（route53）
 
   tags = {
     Name = "interface_endpoint_vpc"
@@ -38,7 +38,7 @@ resource "aws_route_table_association" "private" {
 }
 
 
-#-------- 以下為 Interface Endpoint  設定
+# -------- 以下為 Interface Endpoint  設定
 
 # VPC Interface Endpoint for SQS
 resource "aws_vpc_endpoint" "sqs" {
