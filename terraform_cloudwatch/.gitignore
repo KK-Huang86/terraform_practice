@@ -1,0 +1,43 @@
+# Terraform 本地目錄
+.terraform/
+
+# Terraform 狀態文件 (包含敏感資訊，絕對不要提交)
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# Terraform 變數文件 (可能包含密碼、API keys 等敏感資訊)
+*.tfvars
+*.tfvars.json
+!example.tfvars
+
+# Terraform crash 日誌
+crash.log
+crash.*.log
+
+# Terraform override 文件 (通常用於本地測試)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI 設定文件
+.terraformrc
+terraform.rc
+
+# macOS 系統文件
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE 和編輯器
+.idea/
+*.swp
+*.swo
+.vscode/
+
+# 敏感設定文件
+*.pem
+*.key
+credentials
+.env
