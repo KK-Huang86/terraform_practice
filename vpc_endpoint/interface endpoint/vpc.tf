@@ -46,7 +46,7 @@ resource "aws_vpc_endpoint" "sqs" {
   service_name      = "com.amazonaws.${var.aws_region}.sqs"
   vpc_endpoint_type = "Interface"
 
-  # 指定要在哪些 Private Subnets 建立 ENI
+  # 指定要在哪些 Private Subnets 建立 ENI(虛擬網卡)
   subnet_ids = [
     aws_subnet.private.id,
   ]
