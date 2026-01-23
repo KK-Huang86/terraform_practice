@@ -5,10 +5,18 @@ resource "aws_instance" "cloudwatch" {
 
   vpc_security_group_ids = [aws_security_group.cloudwatch-sg.id]
   key_name               = aws_key_pair.ec2.key_name
+  iam_instance_profile   = aws_iam_instance_profile.cloudwatch_agent.name
+  # 啟用詳細監控 (相隔1分鐘)
+  monitoring = true
 
   tags = {
     Name = "cloudwatch"
   }
+}
+
+resource "aws_key_pair" "ec2" {
+  key_name   = "cloudwatch-key"
+  public_key = file("~/.ssh/1226_rds.pub")   # 共用公鑰
 }
 
 
